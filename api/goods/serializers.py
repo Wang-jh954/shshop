@@ -1,21 +1,24 @@
 from rest_framework import serializers
 from shshop.module.goods.models import (ShShopCategory, ShShopSPU,
-                                           ShShopSpec, ShShopSpecOption,
-                                           ShShopSKU, ShSPUCarousel)
+                                        ShShopSpec, ShShopSpecOption,
+                                        ShShopSKU, ShSPUCarousel)
+
 
 class Model1Serializer(serializers.ModelSerializer):
     class Meta:
         model = ShShopSPU
-        fields = ['id', 'title','category','cover_pic' ,'content','owner']
+        fields = ['id', 'title', 'category', 'cover_pic', 'content', 'owner']
+
 
 class Model2Serializer(serializers.ModelSerializer):
     class Meta:
         model = ShShopSKU
         fields = ['id', 'price', 'sales']
 
+
 class SkuallSerializer(serializers.Serializer):
     spu = Model1Serializer()
-    cover_pic = serializers.ImageField(   label="封面图",required=False)
+    cover_pic = serializers.ImageField(label="封面图", required=False)
     price = serializers.DecimalField(label="售价", max_digits=8, decimal_places=2)
     cost_price = serializers.DecimalField(label="成本价", max_digits=8, decimal_places=2)
     org_price = serializers.DecimalField(label="原价", max_digits=8, decimal_places=2)

@@ -1,6 +1,8 @@
 from shshop.models import *
 from rest_framework import generics
 from .serializers import *
+
+
 class MenuList(generics.ListCreateAPIView):
     queryset = ShMenu.objects.all()
     serializer_class = MenuSerializer
@@ -24,13 +26,13 @@ class UploadList(generics.ListCreateAPIView):
 class UserInfoList(generics.ListCreateAPIView):
     # queryset = UserInfo.objects.all()
     serializer_class = UserInfoSerializer
+
     def get_queryset(self):
         queryset = UserInfo.objects.all()
         owner = self.request.query_params.get('owner', None)
         if owner is not None:
             queryset = queryset.filter(owner=owner)
         return queryset
-
 
 
 class UserBalanceLogList(generics.ListCreateAPIView):
@@ -50,14 +52,18 @@ class ShopCategoryList(generics.ListCreateAPIView):
 
 class ShopSPUList(generics.ListCreateAPIView):
     serializer_class = ShopSPUSerializer
+
     def get_queryset(self):
         queryset = ShShopSPU.objects.all()
         var = self.request.query_params.get('uid', None)
         if var is not None:
             queryset = queryset.filter(owner=var)
         return queryset
+
+
 class ShopSPUCList(generics.ListCreateAPIView):
     serializer_class = ShopSPUSerializer
+
     def get_queryset(self):
         queryset = ShShopSPU.objects.all()
         var = self.request.query_params.get('ctg', None)
@@ -78,12 +84,14 @@ class ShopSpecOptionList(generics.ListCreateAPIView):
 
 class ShopSKUList(generics.ListCreateAPIView):
     serializer_class = ShopSKUSerializer
+
     def get_queryset(self):
         queryset = ShShopSKU.objects.all()
         var = self.request.query_params.get('spu', None)
         if var is not None:
             queryset = queryset.filter(spu=var)
         return queryset
+
 
 class SPUCarouselList(generics.ListCreateAPIView):
     queryset = ShSPUCarousel.objects.all()
@@ -92,12 +100,14 @@ class SPUCarouselList(generics.ListCreateAPIView):
 
 class ShopOrderInfoList(generics.ListCreateAPIView):
     serializer_class = ShopOrderInfoSerializer
+
     def get_queryset(self):
         queryset = ShShopOrderInfo.objects.all()
         var = self.request.query_params.get('owner', None)
         if var is not None:
             queryset = queryset.filter(owner=var)
         return queryset
+
 
 class ShoppingCart(generics.ListCreateAPIView):
     queryset = ShShopingCart.objects.all()

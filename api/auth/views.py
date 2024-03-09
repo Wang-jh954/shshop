@@ -29,16 +29,11 @@ class RegisterView(CreateAPIView):
     permission_classes = [AllowAny]
 
 
-
-
-
 from rest_framework.views import APIView
 from rest_framework.parsers import MultiPartParser, FormParser
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
-
-
 
 from rest_framework import status
 from rest_framework.response import Response
@@ -58,4 +53,3 @@ class UserAvatarUpdateView(APIView):
             user.save()
             return Response({"success": "Avatar updated successfully"})
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
